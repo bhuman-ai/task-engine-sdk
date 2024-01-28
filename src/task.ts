@@ -1,6 +1,6 @@
 import { connect } from "./connect";
 import { EventEmitter } from "./event-emitter";
-import { ClientEvents, ServerEvents } from "./types";
+import { ClientEvents, ServerEvents, serverEvents } from "./types";
 
 const DEFAULT_BASE_URL = "https://auto-spawner.bhumanai.workers.dev";
 
@@ -66,7 +66,9 @@ export class Task extends EventEmitter<TaskEvents> {
     this.socket.send(JSON.stringify({ type, ...data }));
   }
 
-  public async start(events: (keyof ServerEvents)[]): Promise<void> {
+  public async start(
+    events: (keyof ServerEvents)[] = [...serverEvents]
+  ): Promise<void> {
     const response = await this.fetch(this.config.baseUrl + "/api/runs", {
       method: "POST",
       headers: {
