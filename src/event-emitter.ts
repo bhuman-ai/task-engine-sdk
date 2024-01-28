@@ -43,4 +43,11 @@ export class EventEmitter<T extends HandlerMap> {
     };
     this.on(event, onceHandler);
   }
+
+  public wait<E extends keyof T>(event: E): Promise<Parameters<T[E]>[0]> {
+    return new Promise((resolve) => {
+      // @ts-ignore - this is correct
+      this.once(event, resolve);
+    });
+  }
 }
