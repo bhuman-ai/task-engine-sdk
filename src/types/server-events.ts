@@ -1,4 +1,5 @@
 import { Handler } from "./base";
+import { ClientEvents } from "./client-events";
 import { Message } from "./message";
 
 export type ServerEvents = {
@@ -10,7 +11,7 @@ export type ServerEvents = {
   }>;
   getVariable: Handler<{ name: string }>;
   help: Handler<{ page: string }>;
-  waitEvent: Handler<{ event: string }>;
+  waitEvent: Handler<{ event: keyof ClientEvents }>;
   status: Handler<{
     status: "loading" | "running" | "completed" | "error" | "waiting";
   }>;

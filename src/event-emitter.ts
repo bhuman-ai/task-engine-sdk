@@ -12,7 +12,7 @@ export class EventEmitter<T extends HandlerMap> {
 
   private taps: Set<TapFn<T>> = new Set();
 
-  protected emit<E extends keyof T>(event: E, data: Parameters<T[E]>[0]) {
+  public emit<E extends keyof T>(event: E, data: Parameters<T[E]>[0]) {
     this.handlers[event]?.forEach((handler) => handler(data));
     this.taps.forEach((tap) => tap(event, data));
   }
