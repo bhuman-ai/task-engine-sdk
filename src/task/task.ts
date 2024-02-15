@@ -1,5 +1,4 @@
-import { EventEmitter } from "../event-emitter";
-import { ClientEvents, ServerEvents } from "../types";
+import { ClientEvents, ServerEvents, EventEmitter } from "../common";
 import { startTask } from "./start-task";
 import { TaskPage } from "./task-page";
 import { Config, RemoteFunction, RemoteFunctionRun, TaskEvents } from "./types";
@@ -47,10 +46,7 @@ export class Task extends EventEmitter<TaskEvents> {
     this.WebSocket = this.config.WebSocket ?? WebSocket;
   }
 
-  public send<T extends keyof ClientEvents>(
-    type: T,
-    data: Omit<Parameters<ClientEvents[T]>[0], "type">
-  ) {
+  public send<T extends keyof ClientEvents>(type: T, data: ClientEvents[T]) {
     this.socket.send(JSON.stringify({ type, ...data }));
   }
 

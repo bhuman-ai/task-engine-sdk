@@ -1,4 +1,3 @@
-export type Handler<T> = (data: T) => void;
 
 export const keyboardActions = ["down", "up", "press"] as const;
 export type KeyboardAction = (typeof keyboardActions)[number];

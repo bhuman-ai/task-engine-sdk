@@ -9,3 +9,4 @@ export * from "./commands";
 export * from "./key-inputs";
 export * from "./server-events";
 export * from "./message";
+export * from "./event-emitter";

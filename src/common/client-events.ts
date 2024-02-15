@@ -1,55 +1,49 @@
-import {
-  Handler,
-  MouseButton,
-  keyboardActions,
-  mouseButtonActions,
-} from "./base";
+import { MouseButton, keyboardActions, mouseButtonActions } from "./base";
 import { APICommand, RemoteCommand } from "./commands";
 import { KeyInput } from "./key-inputs";
 import { ServerEvents } from "./server-events";
 
 export type ClientEvents = {
-  setVariable: Handler<{ name: string; value: string; save?: boolean }>;
-  resume: Handler<{}>;
-  setStepMode: Handler<{ enable: boolean }>;
-  keyboard: Handler<{
+  setVariable: { name: string; value: string; save?: boolean };
+  resume: {};
+  setStepMode: { enable: boolean };
+  keyboard: {
     page: string;
     action: (typeof keyboardActions)[number];
     key: KeyInput;
-  }>;
-  mouseButton: Handler<{
+  };
+  mouseButton: {
     page: string;
     action: (typeof mouseButtonActions)[number];
     button: MouseButton;
-  }>;
-  mouseMove: Handler<{ page: string; x: number; y: number }>;
-  mouseWheel: Handler<{ page: string; deltaX: number; deltaY: number }>;
-  reply: Handler<{ message: string }>;
-  closePage: Handler<{ page: string }>;
-  exit: Handler<{}>;
-  addCommands: Handler<{
+  };
+  mouseMove: { page: string; x: number; y: number };
+  mouseWheel: { page: string; deltaX: number; deltaY: number };
+  reply: { message: string };
+  closePage: { page: string };
+  exit: {};
+  addCommands: {
     remoteCommands: RemoteCommand[];
     apiCommands: APICommand[];
-  }>;
-  removeCommands: Handler<{
+  };
+  removeCommands: {
     names: string[];
-  }>;
-  remoteCommandResponse: Handler<{
+  };
+  remoteCommandResponse: {
     name: string;
     response: string[];
-  }>;
-  evaluateRequest: Handler<{
+  };
+  evaluateRequest: {
     page: string;
     code: string;
-  }>;
-  screenshotRequest: Handler<{
+  };
+  screenshotRequest: {
     page: string;
-  }>;
-  hello: Handler<{
-    type: string;
+  };
+  hello: {
     secret: string;
     events: (keyof ServerEvents)[];
-  }>;
+  };
 };
 
 export const clientEvents = [

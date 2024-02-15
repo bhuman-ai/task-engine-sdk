@@ -1,5 +1,5 @@
 import { connectSocket } from "../connect-socket";
-import { ServerEvents, serverEvents } from "../types";
+import { ServerEvents, serverEvents } from "../common";
 import { type Task } from "./task";
 
 export async function startTask(
@@ -58,7 +58,7 @@ export async function startTask(
   };
 
   task.send("hello", {
-    events,
+    events: events,
     secret: task.config.engineSecret,
   });
 }

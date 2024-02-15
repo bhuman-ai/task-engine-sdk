@@ -1,4 +1,4 @@
-import { KeyInput, MouseButton } from "../types";
+import { KeyInput, MouseButton } from "../common";
 import { Task } from "./task";
 
 export class TaskPage {

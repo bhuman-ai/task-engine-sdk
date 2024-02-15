@@ -1,4 +1,4 @@
-import { RemoteCommand, ServerEvents } from "../types";
+import { RemoteCommand, ServerEvents } from "../common";
 
 export interface Config {
   clientId: string;
@@ -12,8 +12,8 @@ export interface Config {
 }
 
 export type TaskEvents = ServerEvents & {
-  socketClose: () => void;
-  socketError: (event: Event) => void;
+  socketClose: undefined;
+  socketError: Event;
 };
 
 export type RemoteFunctionRun = (
