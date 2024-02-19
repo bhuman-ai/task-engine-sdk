@@ -17,10 +17,10 @@
     "outDir": "dist/types",
     "emitDeclarationOnly": true,
     "removeComments": false,
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "task-engine-sdk": ["./src"]
+    }
   },
-  "include": ["src"],
-  "ts-node": {
-    "transpileOnly": true
-  }
+  "include": ["src", "examples"],
 }

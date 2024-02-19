@@ -25,20 +25,14 @@ export async function startTask(
 
   const data = await response.json();
 
-  console.log("Started task", data);
-
   if (!data.url) {
     throw new Error("Failed to start task: " + data.error);
   }
-
-  console.log("Connecting to task execution server");
 
   task.socket = await connectSocket(
     task.WebSocket,
     data.url.replace("http", "ws")
   );
-
-  console.log("Connected to task execution server");
 
   task.socket.onmessage = (event) => {
     const data = JSON.parse(event.data);

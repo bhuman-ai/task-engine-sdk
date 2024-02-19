@@ -1,6 +1,6 @@
 import { RemoteCommand, ServerEvents } from "../common";
 
-export interface Config {
+export type Config = {
   clientId: string;
   clientSecret: string;
   engineSecret: string;

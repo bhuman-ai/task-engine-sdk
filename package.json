@@ -1,7 +1,7 @@
 {
-  "name": "@swrf/core",
+  "name": "task-engine-sdk",
   "version": "0.0.1",
-  "type": "commonjs",
+  "repository": "https://github.com/bhuman-ai/task-engine-sdk",
   "types": "./dist/types/browser/index.d.ts",
   "exports": {
     "browser": {
@@ -16,7 +16,10 @@
     }
   },
   "scripts": {
-    "build": "tsc && rollup -c"
+    "build": "tsc -P tsconfig.build.json && rollup -c",
+    "docs:dev": "vuepress dev doc",
+    "docs:build": "vuepress build doc",
+    "dev": "ts-node -r tsconfig-paths/register"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -26,7 +29,9 @@
     "rollup": "^4.9.6",
     "rollup-plugin-bundle-size": "^1.0.3",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3",
+    "vuepress": "^1.5.3",
     "ws": "^8.16.0"
   }
 }

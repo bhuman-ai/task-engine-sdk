@@ -9,8 +9,7 @@ const output = "dist";
 const plugins = [bundleSize(), swcTransform(), nodeResolve({ extensions })];
 
 export default defineConfig([
-  bundle("src/browser", "browser"),
-  bundle("src/node", "node"),
+  bundle("src"),
 ]);
 
 

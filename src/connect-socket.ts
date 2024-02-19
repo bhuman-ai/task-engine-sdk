@@ -2,13 +2,9 @@ const MAX_RETRIES = 20;
 const RETRY_TIMEOUT = 2000;
 
 export async function connectSocket(WS: typeof WebSocket, url: string) {
-  console.log("Connecting to task execution server", url);
-
   return new Promise<WebSocket>((resolve, reject) => {
     let retries = 0;
     const retry = () => {
-      console.log("Retrying connection to task execution server");
-
       retries++;
 
       const socket = new WS(url);

@@ -1,2 +1,2 @@
 export { Task } from "./task";
-export { Config } from "./types";
+export { type Config } from "./types";

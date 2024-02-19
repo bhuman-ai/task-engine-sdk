@@ -69,6 +69,10 @@ export class Task extends EventEmitter<TaskEvents> {
     });
   }
 
+  public async exit() {
+    this.send("exit", {});
+  }
+
   public addFunction({ run, ...spec }: RemoteFunction) {
     this.send("addCommands", {
       remoteCommands: [spec],
@@ -81,5 +85,14 @@ export class Task extends EventEmitter<TaskEvents> {
   public removeFunction(name: string) {
     this.send("removeCommands", { names: [name] });
     delete this.remoteCommands[name];
+  }
+
+  public async waitDone() {
+    while (true) {
+      const event = await this.wait("command");
+      if (event.name === "done") {
+        return event.args[0] as string;
+      }
+    }
   }
 }
