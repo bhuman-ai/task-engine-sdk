@@ -66,22 +66,23 @@ export class TaskPage {
     });
   }
 
-  public evaluate(code: string | Function) {
-    if (typeof code === "function") {
-      code = `(${code})()`;
-    }
-
+  public async evaluate<T = unknown, A extends unknown[] = []>(
+    fn: (...args: A) => T,
+    ...args: A
+  ) {
     this.task.send("evaluateRequest", {
       page: this.name,
-      code,
+      code: `(${fn})(...${JSON.stringify(args)})`,
     });
-    return this.task.wait("evaluateResponse");
+    const out = await this.task.wait("evaluateResponse");
+    return out["result"] as T;
   }
 
-  public screenshot() {
+  public async screenshot() {
     this.task.send("screenshotRequest", {
       page: this.name,
     });
-    return this.task.wait("screenshotResponse");
+    const { data } = await this.task.wait("screenshotResponse");
+    return data;
   }
 }

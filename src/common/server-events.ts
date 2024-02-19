@@ -18,6 +18,11 @@ export type ServerEvents = {
   removePage: { page: string };
   evaluateResponse: { page: string; result: unknown };
   screenshotResponse: { page: string; data: string };
+  ready: {
+    pages: string[];
+    prompt: string;
+    waiting?: keyof ClientEvents;
+  };
 };
 
 export const serverEvents = [

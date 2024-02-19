@@ -1,4 +1,4 @@
-const MAX_RETRIES = 10;
+const MAX_RETRIES = 20;
 const RETRY_TIMEOUT = 2000;
 
 export async function connectSocket(WS: typeof WebSocket, url: string) {

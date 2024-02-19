@@ -7,8 +7,8 @@ export interface Config {
 
   authorization?: string;
   baseUrl?: string;
-  fetch?: typeof fetch;
-  WebSocket?: typeof WebSocket;
+  fetch?: any;
+  WebSocket?: any;
 }
 
 export type TaskEvents = ServerEvents & {

@@ -48,12 +48,9 @@ export async function startTask(
   task.socket.onclose = () => task.emit("socketClose", undefined);
   task.socket.onerror = (event) => task.emit("socketError", event);
   task.socket.onmessage = (event) => {
-    console.log("onmessage", typeof event.data);
     if (typeof event.data === "string") {
       const { type, ...data } = JSON.parse(event.data);
       task.emit(type, data);
-    } else {
-      console.log(event.data);
     }
   };
 
@@ -61,4 +58,6 @@ export async function startTask(
     events: events,
     secret: task.config.engineSecret,
   });
+
+  await task.wait("ready");
 }
