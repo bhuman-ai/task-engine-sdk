@@ -30,6 +30,7 @@ export const config: Config = {
 </summary>
 
 ```ts
+import { Config } from "task-engine-sdk";
 import fetch from "node-fetch";
 import WebSocket from "ws";
 
@@ -52,11 +53,10 @@ import { Task } from "task-engine-sdk";
 const task = new Task(config, "What time is it in NYC?");
 ```
 
-### Step 3: Start it and wait until it is done
+### Step 3: Run the task
 
 ```ts
-await task.start();
-const result = await task.waitDone(); // It is 12:00 PM in NYC.
+const result = await task.run(); // It is 12:00 PM in NYC.
 ```
 
 ### Advanced Usage
