@@ -17,8 +17,9 @@
   },
   "scripts": {
     "build": "tsc -P tsconfig.build.json && rollup -c",
-    "docs:dev": "vuepress dev doc",
-    "docs:build": "vuepress build doc",
+    "doc:dev": "vuepress dev doc",
+    "doc:build": "vuepress build doc",
+    "doc:types": "typedoc --themeColor '#187EE7' --plugin typedoc-material-theme src/index.ts",
     "dev": "ts-node -r tsconfig-paths/register"
   },
   "devDependencies": {
@@ -30,6 +31,8 @@
     "rollup-plugin-bundle-size": "^1.0.3",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "typedoc": "^0.25.8",
+    "typedoc-material-theme": "^1.0.2",
     "typescript": "^5.3.3",
     "vuepress": "^1.5.3",
     "ws": "^8.16.0"

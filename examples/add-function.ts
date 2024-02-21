@@ -1,17 +1,19 @@
-import { Task } from "task-engine-sdk";
+import { Task, FunctionsPlugin } from "task-engine-sdk";
 import { config } from "./node-config";
 
 const task = new Task(config, "What is 123 * 123?");
+const functions = new FunctionsPlugin();
+task.use(functions);
+
+functions.add({
+  name: "multiply",
+  args: ["number a", "number b"],
+  description: "Multiply two numbers together",
+  run: (a: string, b: string) => [`Answer: ${+a * +b}`],
+});
 
 async function main() {
   await task.start();
-
-  task.addFunction({
-    name: "multiply",
-    args: ["number a", "number b"],
-    description: "Multiply two numbers together",
-    run: (a: string, b: string) => [`Answer: ${+a * +b}`],
-  });
 
   const answer = await task.waitDone();
 

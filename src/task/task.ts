@@ -1,21 +1,31 @@
-import { ClientEvents, ServerEvents, EventEmitter } from "../common";
+import { ClientEvents, EventEmitter, ServerEvents } from "../common";
+import { Config, TaskEvents } from "../types";
 import { startTask } from "./start-task";
 import { TaskPage } from "./task-page";
-import { Config, RemoteFunction, RemoteFunctionRun, TaskEvents } from "./types";
+
+export interface TaskPlugin {
+  setupFor(task: Task): void;
+}
 
 const DEFAULT_BASE_URL = "https://auto-spawner.bhumanai.workers.dev";
 
+/**
+ * Task that can be run in the Task Agent
+ */
 export class Task extends EventEmitter<TaskEvents> {
-  public config: Config;
-  public socket!: WebSocket;
-  public fetch: typeof fetch;
-  public WebSocket: typeof WebSocket;
-  public authorization!: string;
-  public prompt: string;
-  public stepByStep: boolean;
+  protected config: Config;
+  protected socket!: WebSocket;
+  protected fetch: typeof fetch;
+  protected WebSocket: typeof WebSocket;
+  protected authorization!: string;
+  protected prompt: string;
+  protected stepByStep: boolean;
 
-  private remoteCommands: Record<string, RemoteFunctionRun> = {};
-
+  /**
+   * @param config The configuration for the task
+   * @param prompt The prompt to run, e.g. "What time is it in New York?"
+   * @param stepByStep Should the task be run step by step. Every step must be confirmed by the user by sending a resume event.
+   */
   constructor(config: Config, prompt: string, stepByStep = false) {
     super();
     this.config = config;
@@ -46,47 +56,50 @@ export class Task extends EventEmitter<TaskEvents> {
     this.WebSocket = this.config.WebSocket ?? WebSocket;
   }
 
+  /**
+   * Send an event to the Task Agent
+   * @param type What type of event to send
+   * @param data The data to send
+   */
   public send<T extends keyof ClientEvents>(type: T, data: ClientEvents[T]) {
     this.socket.send(JSON.stringify({ type, ...data }));
   }
 
+  /**
+   * Get a page in the browser
+   * @param name The name of the page
+   */
   public page(name: string) {
     return new TaskPage(this, name);
   }
 
+  /**
+   * Start the task
+   * @param events The events to listen for, defaults to listening to all events
+   */
   public async start(events?: (keyof ServerEvents)[]) {
-    await startTask(this, events);
-
-    this.on("remoteCommandRequest", async ({ name, args }) => {
-      const run = this.remoteCommands[name];
-
-      if (!run) return;
-
-      this.send("remoteCommandResponse", {
-        name,
-        response: await run(...args),
-      });
-    });
+    await startTask.bind(this)(events);
   }
 
+  /**
+   * Exit the task, this will force the task to stop
+   */
   public async exit() {
     this.send("exit", {});
   }
 
-  public addFunction({ run, ...spec }: RemoteFunction) {
-    this.send("addCommands", {
-      remoteCommands: [spec],
-      apiCommands: [],
-    });
-
-    this.remoteCommands[spec.name] = run;
+  /**
+   * Use a plugin for the task
+   * @param plugin The plugin to use
+   */
+  public use(plugin: TaskPlugin) {
+    plugin.setupFor(this);
   }
 
-  public removeFunction(name: string) {
-    this.send("removeCommands", { names: [name] });
-    delete this.remoteCommands[name];
-  }
-
+  /**
+   * Wait for the task to be done
+   * @returns The result of the task, e.g. The answer to the prompt.
+   */
   public async waitDone() {
     while (true) {
       const event = await this.wait("command");

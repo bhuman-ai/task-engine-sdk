@@ -8,7 +8,7 @@ export type ServerEvents = {
     name: string;
     args: string[];
   };
-  getVariable: { name: string };
+  getVariable: { name: string; page?: string };
   help: { page: string };
   waitEvent: { event: keyof ClientEvents };
   status: {

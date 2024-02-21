@@ -3,19 +3,19 @@ import { ServerEvents, serverEvents } from "../common";
 import { type Task } from "./task";
 
 export async function startTask(
-  task: Task,
+  this: Task,
   events: (keyof ServerEvents)[] = [...serverEvents]
 ): Promise<void> {
-  const response = await task.fetch(task.config.baseUrl + "/api/runs", {
+  const response = await this.fetch(this.config.baseUrl + "/api/runs", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: task.authorization,
+      Authorization: this.authorization,
     },
     body: JSON.stringify({
-      prompt: task.prompt,
-      step: task.stepByStep,
-      secret: task.config.engineSecret,
+      prompt: this.prompt,
+      step: this.stepByStep,
+      secret: this.config.engineSecret,
     }),
   });
 
@@ -29,29 +29,29 @@ export async function startTask(
     throw new Error("Failed to start task: " + data.error);
   }
 
-  task.socket = await connectSocket(
-    task.WebSocket,
+  this.socket = await connectSocket(
+    this.WebSocket,
     data.url.replace("http", "ws")
   );
 
-  task.socket.onmessage = (event) => {
+  this.socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    task.emit(data.event, data.data);
+    this.emit(data.event, data.data);
   };
 
-  task.socket.onclose = () => task.emit("socketClose", undefined);
-  task.socket.onerror = (event) => task.emit("socketError", event);
-  task.socket.onmessage = (event) => {
+  this.socket.onclose = () => this.emit("socketClose", undefined);
+  this.socket.onerror = (event) => this.emit("socketError", event);
+  this.socket.onmessage = (event) => {
     if (typeof event.data === "string") {
       const { type, ...data } = JSON.parse(event.data);
-      task.emit(type, data);
+      this.emit(type, data);
     }
   };
 
-  task.send("hello", {
+  this.send("hello", {
     events: events,
-    secret: task.config.engineSecret,
+    secret: this.config.engineSecret,
   });
 
-  await task.wait("ready");
+  await this.wait("ready");
 }
