@@ -13,10 +13,7 @@ functions.add({
 });
 
 async function main() {
-  await task.start();
-
-  const answer = await task.waitDone();
-
+  const answer = await task.run();
   console.log(answer); // The result of multiplying 123 by 123 is 15129.
   process.exit();
 }

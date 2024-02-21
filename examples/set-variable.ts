@@ -20,8 +20,7 @@ vars.add({
 });
 
 async function main() {
-  await task.start();
-  const answer = await task.waitDone();
+  const answer = await task.run();
   console.log(answer);
   process.exit();
 }

@@ -81,6 +81,11 @@ export class Task extends EventEmitter<TaskEvents> {
     await startTask.bind(this)(events);
   }
 
+  public async run() {
+    await this.start();
+    return await this.waitDone();
+  }
+
   /**
    * Exit the task, this will force the task to stop
    */
