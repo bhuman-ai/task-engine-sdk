@@ -9,6 +9,11 @@ export interface TaskPlugin {
 
 const DEFAULT_BASE_URL = "https://auto-spawner.bhumanai.workers.dev";
 
+export const FETCH_UNDEFINED_ERROR =
+  "Fetch is not defined globally, please provide a fetch function in the config";
+export const WEBSOCKET_UNDEFINED_ERROR =
+  "WebSocket is not defined globally, please provide a WebSocket function in the config";
+
 /**
  * Task that can be run in the Task Agent
  */
@@ -41,15 +46,11 @@ export class Task extends EventEmitter<TaskEvents> {
     }
 
     if (!this.config.fetch && typeof fetch === "undefined") {
-      throw new Error(
-        "Fetch is not defined globally, please provide a fetch function in the config"
-      );
+      throw new Error(FETCH_UNDEFINED_ERROR);
     }
 
     if (!this.config.WebSocket && typeof WebSocket === "undefined") {
-      throw new Error(
-        "WebSocket is not defined globally, please provide a WebSocket function in the config"
-      );
+      throw new Error(WEBSOCKET_UNDEFINED_ERROR);
     }
 
     this.fetch = this.config.fetch ?? fetch;

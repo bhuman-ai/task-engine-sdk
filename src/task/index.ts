@@ -1,1 +1,1 @@
-export { Task, TaskPlugin } from "./task";
+export * from "./task";

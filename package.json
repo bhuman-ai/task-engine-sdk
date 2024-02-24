@@ -23,10 +23,13 @@
     "dev": "ts-node -r tsconfig-paths/register"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/ws": "^8.5.10",
+    "jest": "^29.7.0",
     "rollup": "^4.9.6",
     "rollup-plugin-bundle-size": "^1.0.3",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typedoc": "^0.25.8",

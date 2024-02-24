@@ -22,5 +22,5 @@
       "task-engine-sdk": ["./src"]
     }
   },
-  "include": ["src", "examples"],
+  "include": ["src", "examples", "test"],
 }

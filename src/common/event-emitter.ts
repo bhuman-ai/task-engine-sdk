@@ -20,7 +20,7 @@ export type TapFn<T extends EventDataMap> = <E extends keyof T>(
  * A simple event emitter.
  */
 export class EventEmitter<T extends EventDataMap> {
-  private handlers: {
+  private listeners: {
     [k in keyof T]?: Set<ListenerFn<T[k]>>;
   } = {};
 
@@ -30,23 +30,23 @@ export class EventEmitter<T extends EventDataMap> {
    * Emit an event with data. This will call all listeners for the event and all taps of this emitter.
    */
   public emit<E extends keyof T>(event: E, data: T[E]) {
-    this.handlers[event]?.forEach((handler) => handler(data));
+    this.listeners[event]?.forEach((listener) => listener(data));
     this.taps.forEach((tap) => tap(event, data));
   }
 
   /**
    * Register a listener for an event.
    */
-  public on<E extends keyof T>(event: E, handler: ListenerFn<T[E]>) {
-    this.handlers[event] ??= new Set();
-    this.handlers[event]?.add(handler);
+  public on<E extends keyof T>(event: E, listener: ListenerFn<T[E]>) {
+    this.listeners[event] ??= new Set();
+    this.listeners[event]?.add(listener);
   }
 
   /**
    * Remove a listener for an event.
    */
-  public off<E extends keyof T>(event: E, handler: ListenerFn<T[E]>) {
-    this.handlers[event]?.delete(handler);
+  public off<E extends keyof T>(event: E, listener: ListenerFn<T[E]>) {
+    this.listeners[event]?.delete(listener);
   }
 
   /**
@@ -66,12 +66,12 @@ export class EventEmitter<T extends EventDataMap> {
   /**
    * Register a listener for an event that will only be called once.
    */
-  public once<E extends keyof T>(event: E, handler: ListenerFn<T[E]>) {
-    const onceHandler: ListenerFn<T[E]> = (data) => {
-      this.off(event, onceHandler);
-      handler(data);
+  public once<E extends keyof T>(event: E, listener: ListenerFn<T[E]>) {
+    const onceListener: ListenerFn<T[E]> = (data) => {
+      this.off(event, onceListener);
+      listener(data);
     };
-    this.on(event, onceHandler);
+    this.on(event, onceListener);
   }
 
   /**
