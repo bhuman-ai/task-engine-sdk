@@ -110,6 +110,7 @@ export class Task extends EventEmitter<TaskEvents> {
     while (true) {
       const event = await this.wait("command");
       if (event.name === "done") {
+        this.socket.close();
         return event.args[0] as string;
       }
     }

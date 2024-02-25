@@ -1,33 +1,47 @@
-const MAX_RETRIES = 20;
-const RETRY_TIMEOUT = 2000;
 
-export async function connectSocket(WS: typeof WebSocket, url: string) {
+
+export async function connectSocket(
+  WS: typeof WebSocket,
+  url: string,
+  maxRetries: number,
+  retryTimeout: number
+) {
   return new Promise<WebSocket>((resolve, reject) => {
     let retries = 0;
-    const retry = () => {
-      retries++;
-
+    const run = () => {
       const socket = new WS(url);
 
-      socket.onopen = () => {
-        socket.onclose = () => {};
-        resolve(socket);
-      };
+      let closed = false;
 
-      function onStop() {
-        if (retries > MAX_RETRIES) {
-          reject(new Error("Failed to connect to task execution server"));
+      function onClose() {
+        if (closed) {
+          return;
+        }
+        closed = true;
+
+        if (retries >= maxRetries) {
+          reject(
+            new Error(
+              "Failed to connect to task execution server after " +
+                retries +
+                " retries"
+            )
+          );
         } else {
-          setTimeout(retry, RETRY_TIMEOUT);
+          retries++;
+          setTimeout(run, retryTimeout);
         }
       }
 
-      socket.onclose = onStop;
+      socket.addEventListener("open", () => {
+        socket.removeEventListener("close", onClose);
+        resolve(socket);
+      });
 
-      // @ts-ignore - nodejs websocket
-      socket.on?.("unexpected-response", onStop);
+      socket.addEventListener("close", onClose);
+      socket.addEventListener("error", onClose);
     };
 
-    retry();
+    run();
   });
 }

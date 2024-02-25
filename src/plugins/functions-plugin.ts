@@ -2,10 +2,10 @@ import { Task, TaskPlugin } from "../task";
 import { RemoteFunction, RemoteFunctionRun } from "../types";
 
 export class FunctionsPlugin implements TaskPlugin {
-  private remoteFunctionRuns: Record<string, RemoteFunctionRun> = {};
-  private addQueue: RemoteFunction[] = [];
-  private removeQueue: string[] = [];
-  private readyTasks: Task[] = [];
+  protected remoteFunctionRuns: Record<string, RemoteFunctionRun> = {};
+  protected addList: RemoteFunction[] = [];
+  protected addedNames: Map<Task, string[]> = new Map();
+  protected readyTasks: Task[] = [];
 
   public setupFor(task: Task) {
     task.once("ready", () => {
@@ -13,7 +13,7 @@ export class FunctionsPlugin implements TaskPlugin {
     });
   }
 
-  private init(task: Task) {
+  protected init(task: Task) {
     task.on("remoteCommandRequest", async ({ name, args }) => {
       const run = this.remoteFunctionRuns[name];
 
@@ -25,11 +25,8 @@ export class FunctionsPlugin implements TaskPlugin {
       });
     });
 
-    for (const remoteFunction of this.addQueue) {
+    for (const remoteFunction of this.addList) {
       this.addForTask(task, remoteFunction);
-    }
-    for (const name of this.removeQueue) {
-      this.removeForTask(task, name);
     }
 
     this.readyTasks.push(task);
@@ -40,20 +37,23 @@ export class FunctionsPlugin implements TaskPlugin {
    * @param remoteFunction The definition of the function to add
    */
   public add(remoteFunction: RemoteFunction) {
-    this.addQueue.push(remoteFunction);
+    this.addList.push(remoteFunction);
+    this.remoteFunctionRuns[remoteFunction.name] = remoteFunction.run;
     for (const task of this.readyTasks) {
       this.addForTask(task, remoteFunction);
     }
   }
 
-  private addForTask(task: Task, remoteFunction: RemoteFunction) {
+  protected addForTask(task: Task, remoteFunction: RemoteFunction) {
     const { run, ...spec } = remoteFunction;
     task.send("addCommands", {
       remoteCommands: [spec],
       apiCommands: [],
     });
-
-    this.remoteFunctionRuns[spec.name] = run;
+    this.addedNames.set(
+      task,
+      (this.addedNames.get(task) ?? []).concat(remoteFunction.name)
+    );
   }
 
   /**
@@ -61,16 +61,20 @@ export class FunctionsPlugin implements TaskPlugin {
    * @param names The names of the functions to remove
    */
   public remove(...names: string[]) {
-    this.removeQueue.push(...names);
+    this.addList = this.addList.filter((fn) => !names.includes(fn.name));
+    for (const name of names) {
+      delete this.remoteFunctionRuns[name];
+    }
     for (const task of this.readyTasks) {
       this.removeForTask(task, ...names);
     }
   }
 
-  private removeForTask(task: Task, ...names: string[]) {
-    task.send("removeCommands", { names });
-    for (const name of names) {
-      delete this.remoteFunctionRuns[name];
-    }
+  protected removeForTask(task: Task, ...names: string[]) {
+    const addedNames = this.addedNames.get(task)!;
+    const namesToRemove = names.filter((name) => addedNames.includes(name));
+    const namesToKeep = addedNames.filter((name) => !names.includes(name));
+    task.send("removeCommands", { names: namesToRemove });
+    this.addedNames.set(task, namesToKeep);
   }
 }

@@ -28,6 +28,7 @@ export type Config = {
 export type TaskEvents = ServerEvents & {
   socketClose: undefined;
   socketError: Event;
+  capture: Blob
 };
 
 /**

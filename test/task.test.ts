@@ -1,46 +1,31 @@
 import { expect, test } from "@jest/globals";
+import { Config, Task } from "task-engine-sdk";
+import WebSocket from "ws";
+import { MINUTES, config } from "./common";
 
-import {
-  Config,
-  Task,
-  FETCH_UNDEFINED_ERROR,
-  WEBSOCKET_UNDEFINED_ERROR,
-} from "task-engine-sdk";
-
-export const config: Config = {
+const invalidConfig: Config = {
   clientId: "CLIENT_ID123",
   clientSecret: "CLIENT_SECRET123",
   engineSecret: "ENGINE_SECRET123",
+  WebSocket,
 };
 
-test("Task without fetch should throw an error", () => {
-  const fetch = globalThis.fetch;
-  (globalThis.fetch as any) = undefined;
+test("Task with invalid credentials should throw Unauthorized", async () => {
+  const task = new Task(invalidConfig, "What is 1 + 1?");
 
-  expect(() => {
-    new Task(config, "What time is it in New York?");
-  }).toThrow(FETCH_UNDEFINED_ERROR);
-
-  globalThis.fetch = fetch;
+  await expect(async () => {
+    await task.run();
+  }).rejects.toThrow("Unauthorized");
 });
 
-test("Task without WebSocket should throw an error", () => {
-  expect(() => {
-    new Task(config, "What time is it in New York?");
-  }).toThrow(WEBSOCKET_UNDEFINED_ERROR);
-});
+test(
+  "Task with valid credentials should work",
+  async () => {
+    const task = new Task(config, "What is 1 + 1?");
 
-test("Task should set correct authorization header", () => {
-  class ExposedTask extends Task {
-    public getAuthorization() {
-      return this.authorization;
-    }
-  }
+    const answer = await task.run();
 
-  globalThis.WebSocket = true as any;
-
-  const task = new ExposedTask(config, "What time is it in New York?");
-  expect(task.getAuthorization()).toEqual(
-    "Basic Q0xJRU5UX0lEMTIzOkNMSUVOVF9TRUNSRVQxMjM="
-  );
-});
+    expect(answer).toContain("2");
+  },
+  2 * MINUTES
+);
