@@ -21,6 +21,7 @@ export type ClientEvents = {
   mouseWheel: { page: string; deltaX: number; deltaY: number };
   reply: { message: string };
   closePage: { page: string };
+  openPage: { url: string, page: string };
   exit: {};
   addCommands: {
     remoteCommands: RemoteCommand[];
@@ -63,4 +64,5 @@ export const clientEvents = [
   "screenshotRequest",
   "setStepMode",
   "setVariable",
+  "openPage"
 ] as const satisfies readonly (keyof ClientEvents)[];

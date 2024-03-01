@@ -102,6 +102,17 @@ export class Task extends EventEmitter<TaskEvents> {
     plugin.setupFor(this);
   }
 
+  public async openPage(name: string, url: string): Promise<TaskPage> {
+    this.send("openPage", { page: name, url });
+    for (let i = 0; i < 10; i++) {
+      const {page} = await this.wait("addPage")
+      if (page === name) {
+        return new TaskPage(this, name);
+      }
+    }
+    throw new Error("Failed to open page");
+  }
+
   /**
    * Wait for the task to be done
    * @returns The result of the task, e.g. The answer to the prompt.
