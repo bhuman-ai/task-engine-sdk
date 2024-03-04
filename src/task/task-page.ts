@@ -95,7 +95,7 @@ export class TaskPage {
 
   /**
    * Run a function in the page
-   * 
+   *
    * Note: the function will be serialized and sent to the page. This means that it cannot reference any variables outside of its scope.
    */
   public async evaluate<T = unknown, A extends unknown[] = []>(
@@ -119,5 +119,74 @@ export class TaskPage {
     });
     const { data } = await this.task.wait("screenshotResponse");
     return data;
+  }
+
+  /**
+   * Type text into the page
+   */
+  public async type(text: string, delay = 0) {
+    this.task.send("type", {
+      page: this.name,
+      text,
+      delay,
+    });
+    await this.task.wait("typeCompleted");
+  }
+
+  /**
+   * Type into an element with a selector
+   */
+  public async typeInto(selector: string, text: string, delay = 0) {
+    await this.focus(selector);
+    await this.type(text, delay);
+  }
+
+  private async opByText(
+    text: string,
+    op: "click" | "scrollIntoView",
+    xOffset = 0,
+    yOffset = 0
+  ) {
+    this.task.send("opByText", {
+      page: this.name,
+      text,
+      op,
+      xOffset,
+      yOffset,
+    });
+    await this.task.wait("opByTextCompleted");
+  }
+
+  /**
+   * Click on an element with the given text
+   */
+  public async clickByText(text: string, xOffset = 0, yOffset = 0) {
+    await this.opByText(text, "click", xOffset, yOffset);
+  }
+
+  /**
+   * Scroll an element with the given text into view
+   */
+
+  public async scrollTextIntoView(text: string, xOffset = 0, yOffset = 0) {
+    await this.opByText(text, "scrollIntoView", xOffset, yOffset);
+  }
+
+  /**
+   * Focus an element with the given text
+   */
+  public async focus(selector: string) {
+    await this.evaluate((selector) => {
+      document.querySelector<HTMLInputElement>(selector)?.focus();
+    }, selector);
+  }
+
+  /**
+   * Click on an element with the given selector
+   */
+  public async click(selector: string) {
+    await this.evaluate((selector) => {
+      document.querySelector<HTMLButtonElement>(selector)?.click();
+    }, selector);
   }
 }

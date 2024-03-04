@@ -23,6 +23,8 @@ export type ServerEvents = {
     prompt: string;
     waiting?: keyof ClientEvents;
   };
+  typeCompleted: { page: string };
+  opByTextCompleted: { page: string };
 };
 
 export const serverEvents = [
@@ -37,4 +39,6 @@ export const serverEvents = [
   "screenshotResponse",
   "status",
   "waitEvent",
+  "typeCompleted",
+  "opByTextCompleted",
 ] as const satisfies readonly (keyof ServerEvents)[];

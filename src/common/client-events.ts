@@ -21,7 +21,7 @@ export type ClientEvents = {
   mouseWheel: { page: string; deltaX: number; deltaY: number };
   reply: { message: string };
   closePage: { page: string };
-  openPage: { url: string, page: string };
+  openPage: { url: string; page: string };
   exit: {};
   addCommands: {
     remoteCommands: RemoteCommand[];
@@ -45,6 +45,18 @@ export type ClientEvents = {
     secret: string;
     events: (keyof ServerEvents)[];
   };
+  type: {
+    page: string;
+    text: string;
+    delay: number;
+  };
+  opByText: {
+    page: string;
+    text: string;
+    op: "click" | "scrollIntoView";
+    xOffset: number;
+    yOffset: number;
+  };
 };
 
 export const clientEvents = [
@@ -64,5 +76,7 @@ export const clientEvents = [
   "screenshotRequest",
   "setStepMode",
   "setVariable",
-  "openPage"
+  "openPage",
+  "type",
+  "opByText"
 ] as const satisfies readonly (keyof ClientEvents)[];
