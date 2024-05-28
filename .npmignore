@@ -1,0 +1,14 @@
+.github
+coverage
+docs
+examples
+node_modules
+spec
+src
+test
+.env
+.gitignore
+rollup.config.mjs
+jest.config.js
+tsconfig.json
+tsconfig.build.json
