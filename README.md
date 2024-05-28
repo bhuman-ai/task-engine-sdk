@@ -79,7 +79,7 @@ functions.add({
 // run the task...
 ```
 
-Please refer to the [examples](examples) directory for more.
+Please refer to the [examples](https://github.com/bhuman-ai/task-engine-sdk/tree/main/examples) directory for more.
 
 - `examples/add-function.ts`: To add a custom function.
 - `examples/open-page.ts`: To open a page in the browser.
