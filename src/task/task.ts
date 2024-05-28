@@ -7,7 +7,7 @@ export interface TaskPlugin {
   setupFor(task: Task): void;
 }
 
-const DEFAULT_BASE_URL = "https://auto-spawner.bhumanai.workers.dev";
+const DEFAULT_BASE_URL = "https://persona-task-engine.bhumanai.workers.dev";
 
 export const FETCH_UNDEFINED_ERROR =
   "Fetch is not defined globally, please provide a fetch function in the config";

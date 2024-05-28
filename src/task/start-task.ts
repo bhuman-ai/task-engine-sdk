@@ -2,7 +2,7 @@ import { connectSocket } from "../connect-socket";
 import { ServerEvents, serverEvents } from "../common";
 import { type Task } from "./task";
 
-const MAX_RETRIES = 20;
+const MAX_RETRIES = 50;
 const RETRY_TIMEOUT = 2000;
 
 export async function startTask(
