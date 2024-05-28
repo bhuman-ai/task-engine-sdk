@@ -1,6 +1,6 @@
 {
   "name": "task-engine-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "https://github.com/bhuman-ai/task-engine-sdk",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -11,11 +11,13 @@
   "scripts": {
     "build": "tsc -P tsconfig.build.json && rollup -c",
     "doc:types": "typedoc --themeColor '#187EE7' --plugin typedoc-material-theme src/index.ts",
-    "dev": "ts-node -r tsconfig-paths/register"
+    "dev": "ts-node -r tsconfig-paths/register",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@swc/core": "^1.5.7",
     "@types/ws": "^8.5.10",
     "dotenv": "^16.4.5",
     "jest": "^29.7.0",
