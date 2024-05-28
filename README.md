@@ -2,6 +2,8 @@
 
 Create, manage and extend BHuman's Task Engine with JavaScript or TypeScript.
 
+The type documentation can be found [here](https://bhuman-ai.github.io/task-engine-sdk/).
+
 ## Installation
 
 ```bash

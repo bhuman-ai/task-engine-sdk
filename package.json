@@ -1,19 +1,12 @@
 {
   "name": "task-engine-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "https://github.com/bhuman-ai/task-engine-sdk",
-  "types": "./dist/types/browser/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
-    "browser": {
-      "import": "./dist/browser.es.js",
-      "require": "./dist/browser.cjs.js",
-      "default": "./dist/browser.es.js"
-    },
-    "node": {
-      "import": "./dist/node.es.js",
-      "require": "./dist/node.cjs.js",
-      "default": "./dist/node.es.js"
-    }
+    "import": "./dist/bundle.es.js",
+    "require": "./dist/bundle.cjs.js",
+    "default": "./dist/bundle.es.js"
   },
   "scripts": {
     "build": "tsc -P tsconfig.build.json && rollup -c",

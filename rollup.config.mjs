@@ -13,7 +13,7 @@ export default defineConfig([
 ]);
 
 
-function bundle(input, name = "") {
+function bundle(input, name = "bundle") {
   return {
     input,
     output: formats.map((format) => {
