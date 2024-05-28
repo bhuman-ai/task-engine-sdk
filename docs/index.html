@@ -1,0 +1,204 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>task-engine-sdk</title><meta name="description" content="Documentation for task-engine-sdk"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-sys-color-primary: #a7c8ff;
+    --md-sys-color-on-primary: #003061;
+    --md-sys-color-primary-container: #004689;
+    --md-sys-color-on-primary-container: #d5e3ff;
+    --md-sys-color-secondary: #bdc7dc;
+    --md-sys-color-on-secondary: #273141;
+    --md-sys-color-secondary-container: #3d4758;
+    --md-sys-color-on-secondary-container: #d9e3f8;
+    --md-sys-color-tertiary: #dbbce1;
+    --md-sys-color-on-tertiary: #3e2845;
+    --md-sys-color-tertiary-container: #563e5d;
+    --md-sys-color-on-tertiary-container: #f8d8fe;
+    --md-sys-color-error: #ffb4ab;
+    --md-sys-color-on-error: #690005;
+    --md-sys-color-error-container: #93000a;
+    --md-sys-color-on-error-container: #ffb4ab;
+    --md-sys-color-background: #1a1c1e;
+    --md-sys-color-on-background: #e3e2e6;
+    --md-sys-color-surface: #1a1c1e;
+    --md-sys-color-on-surface: #e3e2e6;
+    --md-sys-color-surface-variant: #43474e;
+    --md-sys-color-on-surface-variant: #c4c6cf;
+    --md-sys-color-outline: #8e9199;
+    --md-sys-color-outline-variant: #43474e;
+    --md-sys-color-shadow: #000000;
+    --md-sys-color-scrim: #000000;
+    --md-sys-color-inverse-surface: #e3e2e6;
+    --md-sys-color-inverse-on-surface: #2f3033;
+    --md-sys-color-inverse-primary: #005eb3;
+    --md-sys-color-surface-dim: #121316;
+    --md-sys-color-surface-bright: #38393c;
+    --md-sys-color-surface-container-lowest: #0d0e11;
+    --md-sys-color-surface-container-low: #1a1c1e;
+    --md-sys-color-surface-container: #1e2023;
+    --md-sys-color-surface-container-high: #292a2d;
+    --md-sys-color-surface-container-highest: #343538
+  }
+}
+:root[data-theme="dark"] {
+  --md-sys-color-primary: #a7c8ff;
+  --md-sys-color-on-primary: #003061;
+  --md-sys-color-primary-container: #004689;
+  --md-sys-color-on-primary-container: #d5e3ff;
+  --md-sys-color-secondary: #bdc7dc;
+  --md-sys-color-on-secondary: #273141;
+  --md-sys-color-secondary-container: #3d4758;
+  --md-sys-color-on-secondary-container: #d9e3f8;
+  --md-sys-color-tertiary: #dbbce1;
+  --md-sys-color-on-tertiary: #3e2845;
+  --md-sys-color-tertiary-container: #563e5d;
+  --md-sys-color-on-tertiary-container: #f8d8fe;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffb4ab;
+  --md-sys-color-background: #1a1c1e;
+  --md-sys-color-on-background: #e3e2e6;
+  --md-sys-color-surface: #1a1c1e;
+  --md-sys-color-on-surface: #e3e2e6;
+  --md-sys-color-surface-variant: #43474e;
+  --md-sys-color-on-surface-variant: #c4c6cf;
+  --md-sys-color-outline: #8e9199;
+  --md-sys-color-outline-variant: #43474e;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #e3e2e6;
+  --md-sys-color-inverse-on-surface: #2f3033;
+  --md-sys-color-inverse-primary: #005eb3;
+  --md-sys-color-surface-dim: #121316;
+  --md-sys-color-surface-bright: #38393c;
+  --md-sys-color-surface-container-lowest: #0d0e11;
+  --md-sys-color-surface-container-low: #1a1c1e;
+  --md-sys-color-surface-container: #1e2023;
+  --md-sys-color-surface-container-high: #292a2d;
+  --md-sys-color-surface-container-highest: #343538
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --md-sys-color-primary: #005eb3;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #d5e3ff;
+    --md-sys-color-on-primary-container: #001b3c;
+    --md-sys-color-secondary: #555f71;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-secondary-container: #d9e3f8;
+    --md-sys-color-on-secondary-container: #121c2b;
+    --md-sys-color-tertiary: #6e5676;
+    --md-sys-color-on-tertiary: #ffffff;
+    --md-sys-color-tertiary-container: #f8d8fe;
+    --md-sys-color-on-tertiary-container: #28132f;
+    --md-sys-color-error: #ba1a1a;
+    --md-sys-color-on-error: #ffffff;
+    --md-sys-color-error-container: #ffdad6;
+    --md-sys-color-on-error-container: #410002;
+    --md-sys-color-background: #fdfbff;
+    --md-sys-color-on-background: #1a1c1e;
+    --md-sys-color-surface: #fdfbff;
+    --md-sys-color-on-surface: #1a1c1e;
+    --md-sys-color-surface-variant: #e0e2ec;
+    --md-sys-color-on-surface-variant: #43474e;
+    --md-sys-color-outline: #74777f;
+    --md-sys-color-outline-variant: #c4c6cf;
+    --md-sys-color-shadow: #000000;
+    --md-sys-color-scrim: #000000;
+    --md-sys-color-inverse-surface: #2f3033;
+    --md-sys-color-inverse-on-surface: #f1f0f4;
+    --md-sys-color-inverse-primary: #a7c8ff;
+    --md-sys-color-surface-dim: #dad9dd;
+    --md-sys-color-surface-bright: #faf9fd;
+    --md-sys-color-surface-container-lowest: #ffffff;
+    --md-sys-color-surface-container-low: #f4f3f7;
+    --md-sys-color-surface-container: #eeedf1;
+    --md-sys-color-surface-container-high: #e9e7eb;
+    --md-sys-color-surface-container-highest: #e3e2e6
+  }
+}
+:root[data-theme="light"] {
+  --md-sys-color-primary: #005eb3;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #d5e3ff;
+  --md-sys-color-on-primary-container: #001b3c;
+  --md-sys-color-secondary: #555f71;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #d9e3f8;
+  --md-sys-color-on-secondary-container: #121c2b;
+  --md-sys-color-tertiary: #6e5676;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #f8d8fe;
+  --md-sys-color-on-tertiary-container: #28132f;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-background: #fdfbff;
+  --md-sys-color-on-background: #1a1c1e;
+  --md-sys-color-surface: #fdfbff;
+  --md-sys-color-on-surface: #1a1c1e;
+  --md-sys-color-surface-variant: #e0e2ec;
+  --md-sys-color-on-surface-variant: #43474e;
+  --md-sys-color-outline: #74777f;
+  --md-sys-color-outline-variant: #c4c6cf;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #2f3033;
+  --md-sys-color-inverse-on-surface: #f1f0f4;
+  --md-sys-color-inverse-primary: #a7c8ff;
+  --md-sys-color-surface-dim: #dad9dd;
+  --md-sys-color-surface-bright: #faf9fd;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f4f3f7;
+  --md-sys-color-surface-container: #eeedf1;
+  --md-sys-color-surface-container-high: #e9e7eb;
+  --md-sys-color-surface-container-highest: #e3e2e6
+}
+</style><link rel="stylesheet" href="assets/material-style.css"/></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">task-engine-sdk</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>task-engine-sdk</h2></div><div class="tsd-panel tsd-typography"><a id="md:task-engine-sdk" class="tsd-anchor"></a><h1><a href="#md:task-engine-sdk">Task Engine SDK</a></h1><p>Manage and extend BHuman&#39;s Task Engine with JavaScript or TypeScript.</p>
+<p>The type documentation can be found <a href="https://bhuman-ai.github.io/task-engine-sdk/">here</a>.</p>
+<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">task-engine-sdk</span>
+</code><button>Copy</button></pre>
+<blockquote>
+<p>You may also need to install <code>fetch</code> and <code>ws</code> depending on your environment.</p>
+</blockquote>
+<a id="md:getting-started" class="tsd-anchor"></a><h2><a href="#md:getting-started">Getting Started</a></h2><a id="md:step-1-define-the-configuration" class="tsd-anchor"></a><h3><a href="#md:step-1-define-the-configuration">Step 1: Define the configuration</a></h3><pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Config</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;task-engine-sdk&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">config</span><span class="hl-1">: </span><span class="hl-7">Config</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-4">clientId:</span><span class="hl-1"> </span><span class="hl-2">&quot;CLIENT_ID&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">clientSecret:</span><span class="hl-1"> </span><span class="hl-2">&quot;CLIENT_SECRET&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">engineSecret:</span><span class="hl-1"> </span><span class="hl-2">&quot;ENGINE_SECRET&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">};</span>
+</code><button>Copy</button></pre>
+<details>
+<summary>
+    Adding fetch and WebSocket if not globally defined.
+</summary>
+
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Config</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;task-engine-sdk&quot;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> </span><span class="hl-4">fetch</span><span class="hl-1"> </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;node-fetch&quot;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> </span><span class="hl-4">WebSocket</span><span class="hl-1"> </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;ws&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">config</span><span class="hl-1">: </span><span class="hl-7">Config</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-4">clientId:</span><span class="hl-1"> </span><span class="hl-2">&quot;CLIENT_ID&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">clientSecret:</span><span class="hl-1"> </span><span class="hl-2">&quot;CLIENT_SECRET&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">engineSecret:</span><span class="hl-1"> </span><span class="hl-2">&quot;ENGINE_SECRET&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">fetch</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">WebSocket</span><span class="hl-1">,</span><br/><span class="hl-1">};</span>
+</code><button>Copy</button></pre>
+</details>
+
+<a id="md:step-2-create-a-task" class="tsd-anchor"></a><h3><a href="#md:step-2-create-a-task">Step 2: Create a task</a></h3><pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Task</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;task-engine-sdk&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">task</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Task</span><span class="hl-1">(</span><span class="hl-4">config</span><span class="hl-1">, </span><span class="hl-2">&quot;What time is it in NYC?&quot;</span><span class="hl-1">);</span>
+</code><button>Copy</button></pre>
+<a id="md:step-3-run-the-task" class="tsd-anchor"></a><h3><a href="#md:step-3-run-the-task">Step 3: Run the task</a></h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">result</span><span class="hl-1"> = </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">task</span><span class="hl-1">.</span><span class="hl-0">run</span><span class="hl-1">(); </span><span class="hl-8">// It is 12:00 PM in NYC.</span>
+</code><button>Copy</button></pre>
+<a id="md:advanced-usage" class="tsd-anchor"></a><h2><a href="#md:advanced-usage">Advanced Usage</a></h2><a id="md:adding-a-custom-function" class="tsd-anchor"></a><h3><a href="#md:adding-a-custom-function">Adding a custom function</a></h3><pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">FunctionsPlugin</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;task-engine-sdk&quot;</span><span class="hl-1">;</span><br/><span class="hl-8">// create the task...</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">functions</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">FunctionsPlugin</span><span class="hl-1">();</span><br/><span class="hl-4">task</span><span class="hl-1">.</span><span class="hl-0">use</span><span class="hl-1">(</span><span class="hl-4">functions</span><span class="hl-1">);</span><br/><span class="hl-4">functions</span><span class="hl-1">.</span><span class="hl-0">add</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-4">name:</span><span class="hl-1"> </span><span class="hl-2">&quot;multiply&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">args:</span><span class="hl-1"> [</span><span class="hl-2">&quot;number a&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;number b&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-4">description:</span><span class="hl-1"> </span><span class="hl-2">&quot;Multiply two numbers together&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">run</span><span class="hl-4">:</span><span class="hl-1"> (</span><span class="hl-4">a</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">, </span><span class="hl-4">b</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> [</span><span class="hl-2">`Answer: </span><span class="hl-5">${</span><span class="hl-1">+</span><span class="hl-4">a</span><span class="hl-9"> </span><span class="hl-1">*</span><span class="hl-9"> </span><span class="hl-1">+</span><span class="hl-4">b</span><span class="hl-5">}</span><span class="hl-2">`</span><span class="hl-1">],</span><br/><span class="hl-1">});</span><br/><span class="hl-8">// run the task...</span>
+</code><button>Copy</button></pre>
+<p>Please refer to the <a href="https://github.com/bhuman-ai/task-engine-sdk/tree/main/examples">examples</a> directory for more.</p>
+<ul>
+<li><code>examples/add-function.ts</code>: To add a custom function.</li>
+<li><code>examples/open-page.ts</code>: To open a page in the browser.</li>
+<li><code>examples/page-evaluate.ts</code>: To run a script in the browser.</li>
+</ul>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:task-engine-sdk"><span>Task <wbr/>Engine SDK</span></a><ul><li><a href="#md:installation"><span>Installation</span></a></li><li><a href="#md:getting-started"><span>Getting <wbr/>Started</span></a></li><li><ul><li><a href="#md:step-1-define-the-configuration"><span>Step 1: <wbr/>Define the configuration</span></a></li><li><a href="#md:step-2-create-a-task"><span>Step 2: <wbr/>Create a task</span></a></li><li><a href="#md:step-3-run-the-task"><span>Step 3: <wbr/>Run the task</span></a></li></ul></li><li><a href="#md:advanced-usage"><span>Advanced <wbr/>Usage</span></a></li><li><ul><li><a href="#md:adding-a-custom-function"><span>Adding a custom function</span></a></li></ul></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>task-engine-sdk</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div><script>
+          try {
+            const generateLinkElement = document.querySelector(".tsd-generator a");
+            const link = document.createElement("a");
+            Object.assign(link, {
+              href: "https://github.com/dmnsgn/typedoc-material-theme",
+              target: "_blank",
+              rel: "noreferrer",
+              innerText: "typedoc-material-theme."
+            });
+            generateLinkElement.insertAdjacentElement("afterend", link);
+            generateLinkElement.insertAdjacentText("afterend", " with ");
+          } catch (error) {
+
+          }
+        </script></body></html>
