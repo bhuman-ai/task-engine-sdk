@@ -1,6 +1,6 @@
 # Task Engine SDK
 
-Create, manage and extend BHuman's Task Engine with JavaScript or TypeScript.
+Manage and extend BHuman's Task Engine with JavaScript or TypeScript.
 
 The type documentation can be found [here](https://bhuman-ai.github.io/task-engine-sdk/).
 
@@ -61,6 +61,26 @@ const task = new Task(config, "What time is it in NYC?");
 const result = await task.run(); // It is 12:00 PM in NYC.
 ```
 
-### Advanced Usage
+## Advanced Usage
 
-Please refer to the examples for more advanced usage.
+### Adding a custom function
+
+```ts
+import { FunctionsPlugin } from "task-engine-sdk";
+// create the task...
+const functions = new FunctionsPlugin();
+task.use(functions);
+functions.add({
+  name: "multiply",
+  args: ["number a", "number b"],
+  description: "Multiply two numbers together",
+  run: (a: string, b: string) => [`Answer: ${+a * +b}`],
+});
+// run the task...
+```
+
+Please refer to the [examples](examples) directory for more.
+
+- `examples/add-function.ts`: To add a custom function.
+- `examples/open-page.ts`: To open a page in the browser.
+- `examples/page-evaluate.ts`: To run a script in the browser.
