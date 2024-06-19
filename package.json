@@ -29,6 +29,6 @@
     "typedoc": "^0.25.8",
     "typedoc-material-theme": "^1.0.2",
     "typescript": "^5.3.3",
-    "ws": "^8.16.0"
+    "ws": "^8.17.1"
   }
 }
